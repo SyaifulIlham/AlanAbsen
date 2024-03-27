@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import '../pages/home.dart'; // Import home.dart file
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -124,7 +124,14 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       backgroundColor: Colors.blue,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // Navigate to MyHomePage when the button is pressed
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MyHomePage(title: 'Home')),
+                      );
+                    },
                     child: const Text(
                       'Masuk',
                       style: TextStyle(color: Colors.white),
