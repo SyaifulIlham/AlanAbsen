@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:alanhr/Splash.dart';
+import 'package:AlanAbsen/Splash.dart';
 
 
 void main() {
