@@ -1,5 +1,5 @@
+import 'package:alanhr/Home.dart';
 import 'package:flutter/material.dart';
-import 'package:alanhr/login.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> {
     Navigator.pushReplacement(
       // ignore: use_build_context_synchronously
       context,
-      MaterialPageRoute(builder: (context) => const LoginPage(title: '')),
+      MaterialPageRoute(builder: (context) => const MyHomePage(title: '')),
     );
   }
 
