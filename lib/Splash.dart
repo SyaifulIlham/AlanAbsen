@@ -29,7 +29,7 @@ class _SplashState extends State<Splash> {
     return const Scaffold(
       body: Center(
         child: Image(
-          image: AssetImage('assets/imagealan.png'), // Replace 'splash_image.png' with your image asset path
+          image: AssetImage('images/imagealan.png'), // Replace 'splash_image.png' with your image asset path
         ),
       ),
     );
