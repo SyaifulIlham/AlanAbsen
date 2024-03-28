@@ -1,6 +1,8 @@
+import 'package:AlanAbsen/AccessControl/forgot_password.dart';
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import '../pages/home.dart'; // Import home.dart file
-import '../pages/secmain.dart';
+import '../bottom_navigation.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -129,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       // Navigate to MyHomePage when the button is pressed
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Secmain()),
+                        MaterialPageRoute(builder: (context) => BottomNavigation()),
                       );
                     },
                     child: const Text(
@@ -155,7 +157,11 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 10),
                   TextButton(
                     onPressed: () {
-                      // Handle forgot password action
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPasswordForm()),
+                      );
                     },
                     style: ButtonStyle(
                       overlayColor: MaterialStateProperty.resolveWith<Color?>(
