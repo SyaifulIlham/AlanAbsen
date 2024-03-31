@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
-void main() => runApp(Maps());
+void main() => runApp(const Maps());
 
 class Maps extends StatelessWidget {
+  const Maps({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Google Maps Demo',
       home: MapScreen(),
     );
@@ -15,7 +17,10 @@ class Maps extends StatelessWidget {
 }
 
 class MapScreen extends StatefulWidget {
+  const MapScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MapScreenState createState() => _MapScreenState();
 }
 
@@ -47,11 +52,11 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Google Maps Demo'),
+        title: const Text('Google Maps Demo'),
       ),
       // ignore: unnecessary_null_comparison
       body: _center == null
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : GoogleMap(
@@ -65,9 +70,9 @@ class _MapScreenState extends State<MapScreen> {
               markers: _currentPosition != null
                   ? {
                       Marker(
-                        markerId: MarkerId("userLocation"),
+                        markerId: const MarkerId("userLocation"),
                         position: _center,
-                        infoWindow: InfoWindow(
+                        infoWindow: const InfoWindow(
                           title: 'Your Location',
                         ),
                       ),

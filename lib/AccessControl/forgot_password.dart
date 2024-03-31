@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login_page.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   // ignore: use_key_in_widget_constructors
@@ -17,12 +18,21 @@ class ForgotPasswordForm extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20.0),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(Icons.arrow_back),
-                      SizedBox(width: 5.0),
-                      Text(
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()),
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 5.0),
+                      const Text(
                         'Lupa password',
                         style: TextStyle(
                           fontSize: 17.0,

@@ -1,48 +1,32 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:AlanAbsen/Splash.dart';
 import 'package:AlanAbsen/pages/home.dart';
+import 'package:AlanAbsen/pages/izin.dart';
+import 'package:AlanAbsen/pages/Account/profile.dart';
+import 'package:AlanAbsen/pages/gaji.dart';
+import 'package:AlanAbsen/pages/absen.dart';
+import 'package:flutter/widgets.dart';
+import "package:persistent_bottom_nav_bar/persistent_tab_view.dart";
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  int _currentIndex = 0;
-
-  final List<Widget> _screens = [
-    Splash(),
-    MyHomePage(title: 'Home Page')
-    // HalamanLain(),
-    // HalamanLain2(),
-  ];
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Alan Creative',
+      title: "Alan Creative",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 58, 183, 156)),
         useMaterial3: true,
       ),
-      home: Scaffold(
-        body: _screens[
-            _currentIndex], // Tampilkan halaman sesuai dengan indeks terpilih
-      ),
+      home: const Splash(), // Menampilkan SplashScreen pada awal aplikasi
     );
   }
 }
