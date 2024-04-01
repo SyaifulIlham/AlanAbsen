@@ -3,7 +3,7 @@ import 'pages/absen.dart';
 import 'pages/gaji.dart';
 import 'pages/home.dart';
 import 'pages/izin.dart';
-import 'pages/Account/profile.dart';
+import 'pages/profile.dart';
 
 
 
@@ -20,8 +20,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = const [
-    AbsenPage(),
     HomePage(),
+    AbsenPage(),
     GajiPage(),
     IzinPage(),
     ProfilePage(),
