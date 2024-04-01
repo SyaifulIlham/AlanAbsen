@@ -40,10 +40,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
-          _buildBottomNavigationBarItem(Icons.access_time, 'Absensi', 0),
-          _buildBottomNavigationBarItem(Icons.home, 'Beranda', 1),
-          _buildBottomNavigationBarItem(Icons.attach_money, 'Gaji', 2),
-          _buildBottomNavigationBarItem(Icons.beach_access, 'Izin Cuti', 3),
+           _buildBottomNavigationBarItem(Icons.home, 'Beranda', 0),
+          _buildBottomNavigationBarItem(Icons.access_time, 'Absensi', 1),
+          _buildBottomNavigationBarItem(Icons.wallet, 'Gaji', 2),
+          _buildBottomNavigationBarItem(Icons.description, 'Izin Cuti', 3),
           _buildBottomNavigationBarItem(Icons.account_circle, 'Akun', 4),
         ],
         currentIndex: _selectedIndex,
