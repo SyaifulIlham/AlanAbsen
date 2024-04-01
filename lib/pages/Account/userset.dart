@@ -1,11 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
+import 'package:image_picker/image_picker.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+  const EditProfilePage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
@@ -14,8 +15,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String _selectedJenisKelamin = 'Laki-laki';
 
   ImageProvider<Object>? _profileImage;
-
-  get _ambilGambar => null;
 
   @override
   void initState() {
@@ -30,6 +29,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
     });
   }
 
+  Future<void> _getImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _profileImage = FileImage(File(image.path));
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,37 +50,43 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GestureDetector(
-                onTap: _ambilGambar,
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundImage: _profileImage,
-                    ),
-                    InkWell(
-                      onTap: _ambilGambar,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.blue,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: _getImage,
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundImage: _profileImage,
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: Icon(
-                            Icons.camera_alt,
-                            color: Colors.white,
+                        Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.blue,
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
+              const Text(
+                'Nama', // Gender
+                style: TextStyle(fontSize: 16),
+              ),
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Nama', // Label for Name
@@ -78,6 +94,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
               const SizedBox(height: 20),
+              const Text(
+                'Email', // Gender
+                style: TextStyle(fontSize: 16),
+              ),
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Email', // Label for Email
@@ -85,6 +105,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
               const SizedBox(height: 20),
+              const Text(
+                'Nomor Telepon', // Gender
+                style: TextStyle(fontSize: 16),
+              ),
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Nomor Telepon', // Label for Phone Number
@@ -92,6 +116,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
               const SizedBox(height: 20),
+              const Text(
+                'Unit Kerja',
+                style: TextStyle(fontSize: 16),
+              ),
               DropdownButtonFormField<String>(
                 value: _selectedUnitKerja,
                 onChanged: (newValue) {
