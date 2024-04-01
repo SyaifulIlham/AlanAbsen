@@ -50,22 +50,22 @@ class ProfileBody extends StatelessWidget {
               backgroundImage: AssetImage('assets/profile_picture.jpg'),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           const Text(
             'Nama Anda',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 0),
           const Text(
             'Web Developer',
             style: TextStyle(fontSize: 16, color: Colors.blueAccent),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 0),
           const Text(
             'email@contoh.com',
             style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 5),
          ListView(
   shrinkWrap: true,
   physics: NeverScrollableScrollPhysics(),
@@ -154,7 +154,7 @@ class ProfileBody extends StatelessWidget {
         );
       },
     ),
-    const SizedBox(height: 40), // Menambah jarak dari item FAQ ke tombol Keluar
+    const SizedBox(height: 30), // Menambah jarak dari item FAQ ke tombol Keluar
   ],
 ),
 
