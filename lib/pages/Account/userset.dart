@@ -1,10 +1,11 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'package:image_picker/image_picker.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+  const EditProfilePage({super.key});
 
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -29,14 +30,61 @@ class _EditProfilePageState extends State<EditProfilePage> {
     });
   }
 
+  Future<void> _showImagePreviewDialog(File imageFile) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Pratinjau Gambar'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              // Use conditional expression to display image based on platform
+              kIsWeb
+                  ? Image.network(imageFile.path)
+                  : Image.file(imageFile),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Batal'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+            ),
+            child: Text('Oke'),
+            onPressed: () {
+              setState(() {
+                _profileImage = (kIsWeb
+                    ? NetworkImage(imageFile.path)
+                    : FileImage(imageFile)) as ImageProvider<Object>?;
+              });
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
   Future<void> _getImage() async {
     final ImagePicker _picker = ImagePicker();
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
+      final File imageFile = File(image.path);
       setState(() {
-        _profileImage = FileImage(File(image.path));
+        _profileImage = FileImage(imageFile);
       });
+      await _showImagePreviewDialog(imageFile);
     }
   }
 
