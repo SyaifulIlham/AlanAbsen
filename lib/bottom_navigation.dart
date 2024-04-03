@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'pages/absen.dart';
 import 'pages/gaji.dart';
 import 'pages/home.dart';
-import 'pages/izin.dart';
+import 'pages/izincuti.dart';
 import 'pages/profile.dart';
-
-
-
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -23,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     HomePage(),
     AbsenPage(),
     GajiPage(),
-    IzinPage(),
+    IzinCutiPage(),
     ProfilePage(),
   ];
 
@@ -39,8 +36,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        elevation: 10, // Menambah nilai elevation untuk mengangkat garis atas di atas border
         items: <BottomNavigationBarItem>[
-           _buildBottomNavigationBarItem(Icons.home, 'Beranda', 0),
+          _buildBottomNavigationBarItem(Icons.home, 'Beranda', 0),
           _buildBottomNavigationBarItem(Icons.access_time, 'Absensi', 1),
           _buildBottomNavigationBarItem(Icons.wallet, 'Gaji', 2),
           _buildBottomNavigationBarItem(Icons.description, 'Izin Cuti', 3),
@@ -80,5 +78,4 @@ class _BottomNavigationState extends State<BottomNavigation> {
       backgroundColor: Colors.white,
     );
   }
-
 }
