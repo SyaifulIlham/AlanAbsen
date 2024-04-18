@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -316,7 +318,7 @@ class _HomePageState extends State<HomePage> {
                                                     226, 238, 255, 0.1)
                                                 : const Color.fromRGBO(
                                                     248, 248, 248, 0.1))
-                                            : Color.fromRGBO(248, 248, 248,
+                                            : const Color.fromRGBO(248, 248, 248,
                                                 0.2), // Menyesuaikan warna container
                                         border: Border.all(
                                           color: _isMasukPressed
@@ -343,9 +345,9 @@ class _HomePageState extends State<HomePage> {
                                             Icon(
                                               Icons.touch_app,
                                               color: _isMasukPressed
-                                                  ? Color.fromRGBO(
+                                                  ? const Color.fromRGBO(
                                                       0, 172, 238, 1)
-                                                  : Color.fromRGBO(
+                                                  : const Color.fromRGBO(
                                                       187, 187, 187, 1),
                                             ),
                                             Text(
@@ -353,9 +355,9 @@ class _HomePageState extends State<HomePage> {
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   color: _isMasukPressed
-                                                      ? Color.fromRGBO(
+                                                      ? const Color.fromRGBO(
                                                           0, 172, 238, 1)
-                                                      : Color.fromRGBO(
+                                                      : const Color.fromRGBO(
                                                           187, 187, 187, 1)),
                                             )
                                           ],

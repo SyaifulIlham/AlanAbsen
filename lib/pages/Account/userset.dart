@@ -36,7 +36,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     barrierDismissible: false, // user must tap button for close dialog!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Pratinjau Gambar'),
+        title: const Text('Pratinjau Gambar'),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
@@ -49,7 +49,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
         actions: <Widget>[
           TextButton(
-            child: Text('Batal'),
+            child: const Text('Batal'),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -58,7 +58,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
             ),
-            child: Text('Oke'),
+            child: const Text('Oke'),
             onPressed: () {
               setState(() {
                 _profileImage = (kIsWeb
@@ -76,8 +76,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
 
   Future<void> _getImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
       final File imageFile = File(image.path);

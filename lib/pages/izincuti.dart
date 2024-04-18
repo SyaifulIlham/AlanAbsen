@@ -4,7 +4,7 @@ import 'package:AlanAbsen/pages/izincuti/cuti/cuti.dart';
 
 
 class IzinCutiPage extends StatefulWidget {
-  const IzinCutiPage({Key? key}) : super(key: key);
+  const IzinCutiPage({super.key});
 
   @override
   _IzinCutiPageState createState() => _IzinCutiPageState();
@@ -32,8 +32,8 @@ class _IzinCutiPageState extends State<IzinCutiPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 15.0),
-                  Padding(
-                    padding: const EdgeInsets.only(
+                  const Padding(
+                    padding: EdgeInsets.only(
                         left: 20.0), // Padding kiri untuk teks "Izin & Cuti"
                     child: Text(
                       'Izin & Cuti',
@@ -156,15 +156,15 @@ class _IzinCutiPageState extends State<IzinCutiPage> {
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.zero,
                                       ),
-                                      side: BorderSide(
+                                      side: const BorderSide(
                                         width: 0,
                                         color: Colors.blue,
                                       ),
                                       backgroundColor: Colors.blue,
                                       foregroundColor: Colors.blue,
-                                      minimumSize: Size(double.infinity, 50),
+                                      minimumSize: const Size(double.infinity, 50),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Ajukan Izin',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -191,15 +191,15 @@ class _IzinCutiPageState extends State<IzinCutiPage> {
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.zero,
                                       ),
-                                      side: BorderSide(
+                                      side: const BorderSide(
                                         width: 0,
                                         color: Colors.blue,
                                       ),
                                       backgroundColor: Colors.blue,
                                       foregroundColor: Colors.blue,
-                                      minimumSize: Size(double.infinity, 50),
+                                      minimumSize: const Size(double.infinity, 50),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Ajukan Cuti',
                                       style: TextStyle(
                                         color: Colors.white,

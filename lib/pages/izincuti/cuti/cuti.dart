@@ -3,15 +3,15 @@ import 'package:intl/intl.dart';
 
 class CutiPage extends StatefulWidget {
   final bool showIzin;
-  const CutiPage({Key? key, this.showIzin = false}) : super(key: key);
+  const CutiPage({super.key, this.showIzin = false});
 
   @override
   _CutiPageState createState() => _CutiPageState();
 }
 
 class _CutiPageState extends State<CutiPage> {
-  TextEditingController _tanggalController = TextEditingController();
-  TextEditingController _alasanController = TextEditingController();
+  final TextEditingController _tanggalController = TextEditingController();
+  final TextEditingController _alasanController = TextEditingController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -50,9 +50,9 @@ class _CutiPageState extends State<CutiPage> {
                     decoration: InputDecoration(
                       labelText: 'Tanggal Izin',
                       hintText: 'Masukkan Tanggal Izin',
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.calendar_today),
+                        icon: const Icon(Icons.calendar_today),
                         onPressed: () {
                           _selectDate(context);
                         },
@@ -62,11 +62,11 @@ class _CutiPageState extends State<CutiPage> {
                   const SizedBox(height: 20.0),
                   TextField(
                     controller: _alasanController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Alasan',
                       hintText: 'Masukkan Alasan Izin',
                       border: OutlineInputBorder(),
-                      prefixIcon: const Icon(Icons.text_snippet),
+                      prefixIcon: Icon(Icons.text_snippet),
                     ),
                     maxLines: null,
                   ),

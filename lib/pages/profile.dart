@@ -11,7 +11,7 @@ void main() {
 }
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key});
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ProfilePage extends StatelessWidget {
 }
 
 class ProfileBody extends StatelessWidget {
-  const ProfileBody({Key? key});
+  const ProfileBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class ProfileBody extends StatelessWidget {
                 width: 2, // Ubah lebar border di sini
               ),
             ),
-            child: CircleAvatar(
+            child: const CircleAvatar(
               radius: 40, // Decreased radius to make it smaller
               backgroundImage: AssetImage('assets/profile_picture.jpg'),
             ),
@@ -68,7 +68,7 @@ class ProfileBody extends StatelessWidget {
           const SizedBox(height: 5),
          ListView(
   shrinkWrap: true,
-  physics: NeverScrollableScrollPhysics(),
+  physics: const NeverScrollableScrollPhysics(),
   children: [
     ListTile(
       leading: const Icon(Icons.person_add, size: 16),

@@ -2,20 +2,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart'; // Import DateFormat from intl package
 
-class IzinPage extends StatefulWidget {
+class ReimbursePage extends StatefulWidget {
   final bool showIzin;
-  const IzinPage({super.key, this.showIzin = false});
+  const ReimbursePage({super.key, this.showIzin = false});
 
   @override
-  _IzinPageState createState() => _IzinPageState();
+  _ReimbursePageState createState() => _ReimbursePageState();
 }
 
-class _IzinPageState extends State<IzinPage> {
+class _ReimbursePageState extends State<ReimbursePage> {
   File? _image;
-  String _selectedJenisIzin = 'WFH';
-  final TextEditingController _tanggalController = TextEditingController();
+  String _selectedJenisIzin = 'Uang Transport';
+  final TextEditingController _nominalController = TextEditingController();
   final TextEditingController _alasanController = TextEditingController();
 
   final picker = ImagePicker();
@@ -26,7 +25,6 @@ class _IzinPageState extends State<IzinPage> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-      } else {
       }
     });
   }
@@ -75,7 +73,7 @@ class _IzinPageState extends State<IzinPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ajukan Izin'),
+        title: const Text('Ajukan Reimburse'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -100,7 +98,7 @@ class _IzinPageState extends State<IzinPage> {
                         _selectedJenisIzin = newValue!;
                       });
                     },
-                    items: <String>['WFH', 'Sakit', 'Izin Lainnya'].map((String value) {
+                    items: <String>['Uang Transport', 'Biaya Server', 'Lainnya'].map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -108,41 +106,23 @@ class _IzinPageState extends State<IzinPage> {
                     }).toList(),
                   ),
                   const SizedBox(height: 20.0),
-                  TextFormField(
-                    controller: _tanggalController,
-                    decoration: InputDecoration(
-                      labelText: 'Tanggal Izin',
-                      hintText: 'Masukkan Tanggal Izin',
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.date_range),
-                        onPressed: () async {
-                          final DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2020),
-                            lastDate: DateTime(2100),
-                          );
-
-                          if (pickedDate != null) {
-                            final formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                            
-                            setState(() {
-                              _tanggalController.text = formattedDate;
-                            });
-                          }
-                        },
-                      ),
+                  TextField(
+                    controller: _nominalController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Nominal (Rp)',
+                      hintText: 'Masukkan Nominal (Rp)',
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.monetization_on),
                     ),
                   ),
                   const SizedBox(height: 20.0),
                   TextField(
                     controller: _alasanController,
                     decoration: const InputDecoration(
-                      labelText: 'Alasan',
-                      hintText: 'Masukkan Alasan Izin',
+                      labelText: 'keterangan',
+                      hintText: 'Masukkan keterangan',
                       border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.text_snippet),
                     ),
                     maxLines: null,
                   ),
@@ -222,4 +202,3 @@ class _IzinPageState extends State<IzinPage> {
     );
   }
 }
-
