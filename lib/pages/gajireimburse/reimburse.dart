@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart'; // Import TextInputFormatter
 import 'package:image_picker/image_picker.dart';
 
 class ReimbursePage extends StatefulWidget {
   final bool showIzin;
-  const ReimbursePage({super.key, this.showIzin = false});
+  const ReimbursePage({Key? key, this.showIzin = false}) : super(key: key);
 
   @override
   _ReimbursePageState createState() => _ReimbursePageState();
@@ -16,6 +17,7 @@ class _ReimbursePageState extends State<ReimbursePage> {
   String _selectedJenisIzin = 'Uang Transport';
   final TextEditingController _nominalController = TextEditingController();
   final TextEditingController _alasanController = TextEditingController();
+  bool _showError = false; // Variable untuk menunjukkan apakah pesan error harus ditampilkan
 
   final picker = ImagePicker();
 
@@ -98,7 +100,11 @@ class _ReimbursePageState extends State<ReimbursePage> {
                         _selectedJenisIzin = newValue!;
                       });
                     },
-                    items: <String>['Uang Transport', 'Biaya Server', 'Lainnya'].map((String value) {
+                    items: <String>[
+                      'Uang Transport',
+                      'Biaya Server',
+                      'Lainnya'
+                    ].map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -109,12 +115,21 @@ class _ReimbursePageState extends State<ReimbursePage> {
                   TextField(
                     controller: _nominalController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')), // Allow only numbers
+                    ],
+                    decoration: InputDecoration(
                       labelText: 'Nominal (Rp)',
                       hintText: 'Masukkan Nominal (Rp)',
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.monetization_on),
+                      errorText: _showError ? 'Masukkan hanya angka' : null, // Tampilkan pesan error jika diperlukan
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        _showError = !RegExp(r'^[0-9]*$').hasMatch(value); // Validasi input dan menampilkan pesan error
+                      });
+                    },
                   ),
                   const SizedBox(height: 20.0),
                   TextField(
