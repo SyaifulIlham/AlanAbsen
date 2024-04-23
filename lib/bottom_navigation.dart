@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/absen.dart';
 import 'pages/gaji.dart';
 import 'pages/home.dart';
-import 'pages/izincuti.dart';
+import 'pages/tabs_izin_cuti.dart';
 import 'pages/profile.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -20,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     HomePage(),
     AbsenPage(),
     GajiPage(),
-    IzinCutiPage(),
+    IzinCutiTabs(),
     ProfilePage(),
   ];
 
