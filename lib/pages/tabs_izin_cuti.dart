@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:AlanAbsen/pages/izincuti/izin/izin.dart';
-import 'package:AlanAbsen/pages/izincuti/cuti/cuti.dart';
+import 'package:AlanAbsen/pages/izincuti/izin/izin.dart'; 
+import 'package:AlanAbsen/pages/izincuti/cuti/cuti.dart'; // Import AjukanIzinButton
 
-
-class IzinCutiPage extends StatefulWidget {
-  const IzinCutiPage({super.key});
+class IzinCutiTabs extends StatefulWidget {
+  const IzinCutiTabs({Key? key}) : super(key: key);
 
   @override
-  _IzinCutiPageState createState() => _IzinCutiPageState();
+  _IzinCutiTabsState createState() => _IzinCutiTabsState();
 }
 
-class _IzinCutiPageState extends State<IzinCutiPage> {
+class _IzinCutiTabsState extends State<IzinCutiTabs> {
   Color leftButtonTextColor = Colors.black;
   Color rightButtonTextColor = Colors.black;
   bool additionalButtonVisibleIzin = false;
@@ -32,9 +31,8 @@ class _IzinCutiPageState extends State<IzinCutiPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 15.0),
-                  const Padding(
-                    padding: EdgeInsets.only(
-                        left: 20.0), // Padding kiri untuk teks "Izin & Cuti"
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: Text(
                       'Izin & Cuti',
                       textAlign: TextAlign.left,
@@ -137,77 +135,12 @@ class _IzinCutiPageState extends State<IzinCutiPage> {
                           alignment: Alignment.center,
                           child: Column(
                             children: [
-                              const SizedBox(height: 400),
+                              const SizedBox(height: 20.0),
+                              
                               if (additionalButtonVisibleIzin)
-                                Padding(
-                                  padding: const EdgeInsets.all(
-                                      8.0), // Tambahkan padding di sini
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const IzinPage(),
-                                        ),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.zero,
-                                      ),
-                                      side: const BorderSide(
-                                        width: 0,
-                                        color: Colors.blue,
-                                      ),
-                                      backgroundColor: Colors.blue,
-                                      foregroundColor: Colors.blue,
-                                      minimumSize: const Size(double.infinity, 50),
-                                    ),
-                                    child: const Text(
-                                      'Ajukan Izin',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        decoration: TextDecoration.none,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                IzinPage(), // Gunakan widget AjukanIzinButton
                               if (additionalButtonVisibleCuti)
-                                Padding(
-                                  padding: const EdgeInsets.all(
-                                      8.0), // Tambahkan padding di sini
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const CutiPage(),
-                                        ),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.zero,
-                                      ),
-                                      side: const BorderSide(
-                                        width: 0,
-                                        color: Colors.blue,
-                                      ),
-                                      backgroundColor: Colors.blue,
-                                      foregroundColor: Colors.blue,
-                                      minimumSize: const Size(double.infinity, 50),
-                                    ),
-                                    child: const Text(
-                                      'Ajukan Cuti',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        decoration: TextDecoration.none,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                CutiPage(), // Gunakan widget AjukanCutiButton
                             ],
                           ),
                         ),
