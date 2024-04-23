@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:AlanAbsen/pages/gajireimburse/reimburse.dart'; // Sesuaikan dengan nama file halaman formulir reimburse
+import 'package:AlanAbsen/pages/gajireimburse/reimburse.dart'; // Ensure this path is correct
 
 class GajiPage extends StatefulWidget {
-  const GajiPage({Key? key});
+  const GajiPage({super.key});
 
   @override
   _GajiPageState createState() => _GajiPageState();
@@ -12,9 +12,11 @@ class _GajiPageState extends State<GajiPage> {
   String _selectedStatus = 'status'; // Default status
   DateTime? _selectedDate;
   String _selectedExpenseType = 'Jenis'; // Default jenis pengeluaran
-  bool _showReimburseForm = false; // Tambah state untuk menunjukkan apakah formulir reimburse ditampilkan
-  bool _showListView = true; // Tambah state untuk menunjukkan apakah ListView harus ditampilkan
-  bool _showDropdown = false; // Tambah state untuk menunjukkan apakah dropdown harus ditampilkan
+  bool _showReimburseForm = false; // State to track if the reimburse form is shown
+  bool _showListView = true; // State to track if the ListView should be shown
+  bool _showDropdown = false; // State to track if the dropdown should be shown
+  bool _isGajiSelected = true; // State to track which button is selected
+  bool _isReimburseSelected = false; // State to track which button is selected
 
   @override
   Widget build(BuildContext context) {
@@ -24,55 +26,54 @@ class _GajiPageState extends State<GajiPage> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'Gaji & Reimburse',
-                textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Corrected
                 children: [
                   Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      child: GestureDetector(
-                        onTap: _handleGajiButtonClick,
-                        child: const Center(
-                          child: Text(
-                            'Gaji',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              decorationColor: Colors.blue,
-                            ),
-                            textAlign: TextAlign.center,
+                    child: InkWell(
+                      onTap: _handleGajiButtonClick,
+                      child: Center(
+                        child: Text(
+                          'Gaji',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: _isGajiSelected ? Colors.blue : Colors.black,
+                            decoration: _isGajiSelected
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
                           ),
                         ),
                       ),
                     ),
                   ),
+                  Container(
+                    width: 1,
+                    height: 40,
+                    color: Colors.grey, // Divider antara Gaji dan Reimburse
+                  ),
                   Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: GestureDetector(
-                        onTap: _handleReimburseButtonClick,
-                        child: const Center(
-                          child: Text(
-                            'Reimburse',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              decorationColor: Colors.blue,
-                            ),
-                            textAlign: TextAlign.center,
+                    child: InkWell(
+                      onTap: _handleReimburseButtonClick,
+                      child: Center(
+                        child: Text(
+                          'Reimburse',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: _isReimburseSelected ? Colors.blue : Colors.black,
+                            decoration: _isReimburseSelected
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
                           ),
                         ),
                       ),
@@ -80,7 +81,7 @@ class _GajiPageState extends State<GajiPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
@@ -91,8 +92,7 @@ class _GajiPageState extends State<GajiPage> {
                           _selectedStatus = newValue!;
                         });
                       },
-                      items: <String>['status', 'Lunas', 'Belum Lunas']
-                          .map((String value) {
+                      items: <String>['status', 'Lunas', 'Belum Lunas'].map((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -104,73 +104,71 @@ class _GajiPageState extends State<GajiPage> {
                   Expanded(
                     child: Row(
                       children: [
-                        _showDropdown
-                            ? Expanded(
-                                child: DropdownButton<String>(
-                                  value: _selectedExpenseType,
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      _selectedExpenseType = newValue!;
-                                    });
-                                  },
-                                  items: <String>[
-                                    'Jenis',
-                                    'Uang Transport',
-                                    'Biaya Server',
-                                    'Lainnya'
-                                  ].map((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                ),
-                              )
-                            : Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 6.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black, width: 1.0),
-                                  borderRadius: BorderRadius.circular(6.0),
-                                ),
-                                child: Row(
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {
-                                        _showDatePicker(context);
-                                      },
-                                      child: Text(
-                                        _selectedDate != null
-                                            ? '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}'
-                                            : 'Pilih Tanggal',
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                      ),
+                        if (_showDropdown)
+                          Expanded(
+                            child: DropdownButton<String>(
+                              value: _selectedExpenseType,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedExpenseType = newValue!;
+                                });
+                              },
+                              items: <String>[
+                                'Jenis',
+                                'Uang Transport',
+                                'Biaya Server',
+                                'Lainnya'
+                              ].map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          )
+                        else
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6.0,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 1.0),
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
+                            child: Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () => _showDatePicker(context),
+                                  child: Text(
+                                    _selectedDate != null
+                                      ? '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}'
+                                      : 'Pilih Tanggal',
+                                    style: const TextStyle(
+                                      color: Colors.black,
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Icon(Icons.calendar_today),
-                                  ],
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(width: 5),
+                                const Icon(Icons.calendar_today),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 20),
-              _showListView
-                  ? ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 15,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text('Item Gaji $index'),
-                        );
-                      },
-                    )
-                  : SizedBox.shrink(),
+              if (_showListView)
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 15,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text('Item Gaji $index'),
+                    );
+                  },
+                ),
               const SizedBox(height: 400),
               if (_showReimburseForm)
                 ElevatedButton(
@@ -186,6 +184,8 @@ class _GajiPageState extends State<GajiPage> {
 
   void _handleGajiButtonClick() {
     setState(() {
+      _isGajiSelected = true; // Menunjukkan tombol yang dipilih
+      _isReimburseSelected = false; // Menyembunyikan underline untuk tombol Reimburse
       _showReimburseForm = false;
       _showListView = true;
       _showDropdown = false; // Menyembunyikan dropdown saat kembali ke Gaji
@@ -194,13 +194,15 @@ class _GajiPageState extends State<GajiPage> {
 
   void _handleReimburseButtonClick() {
     setState(() {
+      _isReimburseSelected = true; // Menunjukkan tombol yang dipilih
+      _isGajiSelected = false; // Menyembunyikan underline untuk tombol Gaji
       _showReimburseForm = true;
       _showListView = false;
       _showDropdown = true; // Menampilkan dropdown saat klik Reimburse
     });
   }
 
-  void _showDatePicker(BuildContext context) async {
+  Future<void> _showDatePicker(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -217,7 +219,9 @@ class _GajiPageState extends State<GajiPage> {
   void _navigateToReimburseForm() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const ReimbursePage()),
+      MaterialPageRoute(
+        builder: (context) => const ReimbursePage(),
+      ),
     );
   }
 }
