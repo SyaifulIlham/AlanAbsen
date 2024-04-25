@@ -19,7 +19,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final List<Widget> _pages = const [
     HomePage(),
     AbsenPage(),
-    GajiPage(),
+    GajiTabs(),
     IzinCutiTabs(),
     ProfilePage(),
   ];

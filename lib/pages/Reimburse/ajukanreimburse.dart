@@ -4,15 +4,15 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart'; // Import TextInputFormatter
 import 'package:image_picker/image_picker.dart';
 
-class ReimbursePage extends StatefulWidget {
+class AjukanReimbursePage extends StatefulWidget {
   final bool showIzin;
-  const ReimbursePage({Key? key, this.showIzin = false}) : super(key: key);
+  const AjukanReimbursePage({Key? key, this.showIzin = false}) : super(key: key);
 
   @override
-  _ReimbursePageState createState() => _ReimbursePageState();
+  _AjukanReimbursePageState createState() => _AjukanReimbursePageState();
 }
 
-class _ReimbursePageState extends State<ReimbursePage> {
+class _AjukanReimbursePageState extends State<AjukanReimbursePage> {
   File? _image;
   String _selectedJenisIzin = 'Uang Transport';
   final TextEditingController _nominalController = TextEditingController();
