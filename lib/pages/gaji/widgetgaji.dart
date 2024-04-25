@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Untuk format tanggal
-import 'package:AlanAbsen/pages/izincuti/cuti/popup_cuti.dart';
+import 'package:AlanAbsen/pages/gaji/popup_gaji.dart';
 
 class GajiPage extends StatefulWidget {
   @override
@@ -75,7 +75,7 @@ class _GajiPageState extends State<GajiPage> {
             status: _status,
             name: 'Syaiful',
             number: 'Rp. 125.000',
-            type: 'Izin',
+            type: 'nama pegawai',
             context: context,
           ),
         ],
@@ -111,7 +111,7 @@ Widget _buildLeaveInfoCard({
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.yellow,
+                    color: Color.fromARGB(255, 80, 79, 75),
                   ),
                 ),
                 Container(
