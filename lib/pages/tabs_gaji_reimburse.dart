@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:AlanAbsen/pages/izincuti/izin/izin.dart'; 
-import 'package:AlanAbsen/pages/izincuti/cuti/cuti.dart'; // Import AjukanIzinButton
+import 'package:AlanAbsen/pages/gajireimburse/reimburse/reimburse.dart'; 
+import 'package:AlanAbsen/pages/gajireimburse/gaji/gaji.dart'; // Import AjukanGajiButton
 
-class IzinCutiTabs extends StatefulWidget {
-  const IzinCutiTabs({Key? key}) : super(key: key);
+class GajiReimburse extends StatefulWidget {
+  const GajiReimburse({Key? key}) : super(key: key);
 
   @override
-  _IzinCutiTabsState createState() => _IzinCutiTabsState();
+  _GajiReimburseState createState() => _GajiReimburseState();
 }
 
-class _IzinCutiTabsState extends State<IzinCutiTabs> {
-  Color leftButtonTextColor = Colors.blue; // Atur warna tab Izin menjadi aktif secara default
+class _GajiReimburseState extends State<GajiReimburse> {
+  Color leftButtonTextColor = Colors.blue; // Atur warna tab Gaji menjadi aktif secara default
   Color rightButtonTextColor = Colors.black;
-  bool additionalButtonVisibleIzin = true;
-  bool additionalButtonVisibleCuti = false;
+  bool additionalButtonVisibleGaji = true;
+  bool additionalButtonVisibleReimburse = false;
 
   Color leftButtonBorderColor = Colors.blue;
   Color rightButtonBorderColor = Colors.transparent;
@@ -23,8 +23,8 @@ class _IzinCutiTabsState extends State<IzinCutiTabs> {
     super.initState();
     // Set state sesuai dengan tab yang ingin dibuka secara otomatis
     setState(() {
-      additionalButtonVisibleIzin = true;
-      additionalButtonVisibleCuti = false;
+      additionalButtonVisibleGaji = true;
+      additionalButtonVisibleReimburse = false;
     });
   }
 
@@ -44,7 +44,7 @@ class _IzinCutiTabsState extends State<IzinCutiTabs> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Text(
-                      'Izin & Cuti',
+                      'Gaji & Reimburse',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 18.0,
@@ -66,8 +66,8 @@ class _IzinCutiTabsState extends State<IzinCutiTabs> {
                                   rightButtonTextColor = Colors.black;
                                   leftButtonBorderColor = Colors.blue;
                                   rightButtonBorderColor = Colors.transparent;
-                                  additionalButtonVisibleIzin = true;
-                                  additionalButtonVisibleCuti = false;
+                                  additionalButtonVisibleGaji = true;
+                                  additionalButtonVisibleReimburse = false;
                                 });
                               },
                               child: Container(
@@ -85,7 +85,7 @@ class _IzinCutiTabsState extends State<IzinCutiTabs> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10.0),
                                     child: Text(
-                                      'Izin',
+                                      'Gaji',
                                       style: TextStyle(
                                         fontSize: 18.0,
                                         color: leftButtonTextColor,
@@ -105,8 +105,8 @@ class _IzinCutiTabsState extends State<IzinCutiTabs> {
                                   leftButtonTextColor = Colors.black;
                                   rightButtonBorderColor = Colors.blue;
                                   leftButtonBorderColor = Colors.transparent;
-                                  additionalButtonVisibleCuti = true;
-                                  additionalButtonVisibleIzin = false;
+                                  additionalButtonVisibleReimburse = true;
+                                  additionalButtonVisibleGaji = false;
                                 });
                               },
                               child: Container(
@@ -124,7 +124,7 @@ class _IzinCutiTabsState extends State<IzinCutiTabs> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10.0),
                                     child: Text(
-                                      'Cuti',
+                                      'Reimburse',
                                       style: TextStyle(
                                         fontSize: 18.0,
                                         color: rightButtonTextColor,
@@ -138,8 +138,8 @@ class _IzinCutiTabsState extends State<IzinCutiTabs> {
                           ),
                         ],
                       ),
-                      if (additionalButtonVisibleIzin ||
-                          additionalButtonVisibleCuti)
+                      if (additionalButtonVisibleGaji ||
+                          additionalButtonVisibleReimburse)
                         Container(
                           width: double.infinity,
                           alignment: Alignment.center,
@@ -147,10 +147,10 @@ class _IzinCutiTabsState extends State<IzinCutiTabs> {
                             children: [
                               const SizedBox(height: 20.0),
                               
-                              if (additionalButtonVisibleIzin)
-                                IzinPage(), // Gunakan widget IzinPage
-                              if (additionalButtonVisibleCuti)
-                                CutiPage(), // Gunakan widget CutiPage
+                              if (additionalButtonVisibleGaji)
+                                GajiPage(), // Gunakan widget GajiPage
+                              if (additionalButtonVisibleReimburse)
+                                ReimbursePage(), // Gunakan widget ReimbursePage
                             ],
                           ),
                         ),

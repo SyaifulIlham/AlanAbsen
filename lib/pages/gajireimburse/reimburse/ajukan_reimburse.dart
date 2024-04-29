@@ -3,28 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
 
-class ReimbursePage extends StatefulWidget {
+class AjukanReimbursePage extends StatefulWidget {
   final bool showIzin;
-  const ReimbursePage({super.key, this.showIzin = false});
+  const AjukanReimbursePage({Key? key, this.showIzin = false}) : super(key: key);
 
   @override
-  _ReimbursePageState createState() => _ReimbursePageState();
+  _AjukanReimbursePageState createState() => _AjukanReimbursePageState();
 }
 
-class _ReimbursePageState extends State<ReimbursePage> {
+class _AjukanReimbursePageState extends State<AjukanReimbursePage> {
   File? _image;
-  String _selectedJenisIzin = 'Uang Transport';
-  final TextEditingController _nominalController = TextEditingController();
-  final TextEditingController _alasanController = TextEditingController();
+  String? _selectedJenisReimburse; // Change to nullable type
+  TextEditingController _nominalController = TextEditingController();
+  TextEditingController _alasanController = TextEditingController(); // Added alasan controller
 
   final picker = ImagePicker();
 
   Future<void> getImage(ImageSource source) async {
-    final pickedFile = await picker.pickImage(source: source);
+    final pickedFile = await picker.getImage(source: source);
 
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
       }
     });
   }
@@ -34,20 +36,11 @@ class _ReimbursePageState extends State<ReimbursePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Preview Gambar'),
+          title: Text('Preview Gambar'),
           content: Image.network(imagePath),
           actions: <Widget>[
             TextButton(
-              child: const Text('Batal'),
-              onPressed: () {
-                setState(() {
-                  _image = null;
-                });
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('OK'),
+              child: Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -73,7 +66,7 @@ class _ReimbursePageState extends State<ReimbursePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ajukan Reimburse'),
+        title: const Text('Tambah Reimburse'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -86,19 +79,23 @@ class _ReimbursePageState extends State<ReimbursePage> {
                 children: [
                   const SizedBox(height: 20.0),
                   DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(
-                      labelText: 'Jenis Izin',
-                      hintText: 'Pilih Jenis Izin',
+                    decoration: InputDecoration(
+                      labelText: 'Pilih Jenis Reimburse',
                       border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.article),
+                      prefixIcon: const Icon(Icons.article),
                     ),
-                    value: _selectedJenisIzin,
+                    value: _selectedJenisReimburse,
                     onChanged: (newValue) {
                       setState(() {
-                        _selectedJenisIzin = newValue!;
+                        _selectedJenisReimburse = newValue!;
                       });
                     },
-                    items: <String>['Uang Transport', 'Biaya Server', 'Lainnya'].map((String value) {
+                    items: <String>[
+                      'Pilih Jenis Reimburse',
+                      'Uang Makan',
+                      'Uang Transport',
+                      'Uang Meeting'
+                    ].map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -106,23 +103,24 @@ class _ReimbursePageState extends State<ReimbursePage> {
                     }).toList(),
                   ),
                   const SizedBox(height: 20.0),
-                  TextField(
+                  TextFormField(
                     controller: _nominalController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Nominal (Rp)',
-                      hintText: 'Masukkan Nominal (Rp)',
+                    decoration: InputDecoration(
+                      labelText: 'Nominal',
+                      hintText: 'Masukkan Nominal',
                       border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.monetization_on),
+                      prefixIcon: const Icon(Icons.monetization_on),
+                      prefixText: 'Rp ',
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  TextField(
+                  TextFormField( // Added TextFormField for alasan
                     controller: _alasanController,
-                    decoration: const InputDecoration(
-                      labelText: 'keterangan',
-                      hintText: 'Masukkan keterangan',
+                    decoration: InputDecoration(
+                      labelText: 'Alasan',
+                      hintText: 'Masukkan Alasan',
                       border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.text_snippet),
                     ),
                     maxLines: null,
                   ),
@@ -138,7 +136,7 @@ class _ReimbursePageState extends State<ReimbursePage> {
                               width: double.infinity,
                               height: 200,
                               decoration: _containerDecoration(),
-                              child: const Column(
+                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/absen.dart';
-import 'pages/gaji.dart';
+import 'pages/tabs_gaji_reimburse.dart';
 import 'pages/home.dart';
 import 'pages/tabs_izin_cuti.dart';
 import 'pages/profile.dart';
@@ -19,7 +19,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final List<Widget> _pages = const [
     HomePage(),
     AbsenPage(),
-    GajiPage(),
+    GajiReimburse(),
     IzinCutiTabs(),
     ProfilePage(),
   ];
@@ -36,7 +36,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        elevation: 10, // Menambah nilai elevation untuk mengangkat garis atas di atas border
         items: <BottomNavigationBarItem>[
           _buildBottomNavigationBarItem(Icons.home, 'Beranda', 0),
           _buildBottomNavigationBarItem(Icons.access_time, 'Absensi', 1),
@@ -61,17 +60,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
         alignment: Alignment.center,
         children: [
           Icon(icon),
-          if (index == _selectedIndex)
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 2,
-                width: 20,
-                color: Colors.blue,
-              ),
-            ),
         ],
       ),
       label: label,
