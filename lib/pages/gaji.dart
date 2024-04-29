@@ -1,21 +1,21 @@
+import 'package:flutter/material.dart';
 import 'package:AlanAbsen/pages/gaji/widgetgaji.dart';
 import 'package:AlanAbsen/pages/Reimburse/reimburse.dart';
-import 'package:flutter/material.dart';
 
 class GajiTabs extends StatefulWidget {
   const GajiTabs({Key? key}) : super(key: key);
 
   @override
-  _GajiTabsState createState() => _GajiTabsState();
+  _GajiPageState createState() => _GajiPageState();
 }
 
-class _GajiTabsState extends State<GajiTabs> {
-  Color leftButtonTextColor = Colors.black;
+class _GajiPageState extends State<GajiTabs> {
+  Color leftButtonTextColor = Colors.blue;
   Color rightButtonTextColor = Colors.black;
-  bool additionalButtonVisibleIzin = false;
-  bool additionalButtonVisibleCuti = false;
+  bool additionalButtonVisibleGaji = true;
+  bool additionalButtonVisibleReimburse = false;
 
-  Color leftButtonBorderColor = Colors.transparent;
+  Color leftButtonBorderColor = Colors.blue;
   Color rightButtonBorderColor = Colors.transparent;
 
   @override
@@ -56,8 +56,8 @@ class _GajiTabsState extends State<GajiTabs> {
                                   rightButtonTextColor = Colors.black;
                                   leftButtonBorderColor = Colors.blue;
                                   rightButtonBorderColor = Colors.transparent;
-                                  additionalButtonVisibleIzin = true;
-                                  additionalButtonVisibleCuti = false;
+                                  additionalButtonVisibleGaji = true;
+                                  additionalButtonVisibleReimburse = false;
                                 });
                               },
                               child: Container(
@@ -95,8 +95,8 @@ class _GajiTabsState extends State<GajiTabs> {
                                   leftButtonTextColor = Colors.black;
                                   rightButtonBorderColor = Colors.blue;
                                   leftButtonBorderColor = Colors.transparent;
-                                  additionalButtonVisibleCuti = true;
-                                  additionalButtonVisibleIzin = false;
+                                  additionalButtonVisibleReimburse = true;
+                                  additionalButtonVisibleGaji = false;
                                 });
                               },
                               child: Container(
@@ -128,19 +128,18 @@ class _GajiTabsState extends State<GajiTabs> {
                           ),
                         ],
                       ),
-                      if (additionalButtonVisibleIzin ||
-                          additionalButtonVisibleCuti)
+                      if (additionalButtonVisibleGaji ||
+                          additionalButtonVisibleReimburse)
                         Container(
                           width: double.infinity,
                           alignment: Alignment.center,
                           child: Column(
                             children: [
                               const SizedBox(height: 20.0),
-                              
-                              if (additionalButtonVisibleIzin)
-                                GajiPage(), // Gunakan widget AjukanIzinButton
-                              if (additionalButtonVisibleCuti)
-                                ReimbursePage(), // Gunakan widget AjukanCutiButton
+                              if (additionalButtonVisibleGaji)
+                                GajiWidget(), // Use GajiWidget here
+                              if (additionalButtonVisibleReimburse)
+                                ReimbursePage(), // Use ReimbursePage here
                             ],
                           ),
                         ),
@@ -151,7 +150,7 @@ class _GajiTabsState extends State<GajiTabs> {
             ),
           ),
         ),
-      ),
-    );
-  }
+      ),
+    );
+  }
 }
