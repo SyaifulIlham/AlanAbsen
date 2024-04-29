@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:AlanAbsen/pages/gaji/widgetgaji.dart';
-import 'package:AlanAbsen/pages/Reimburse/reimburse.dart';
+import 'package:AlanAbsen/pages/gajireimburse/gaji/gaji.dart';
+import 'package:AlanAbsen/pages/gajireimburse/reimburse/reimburse.dart';
 
 class GajiTabs extends StatefulWidget {
   const GajiTabs({Key? key}) : super(key: key);
@@ -137,7 +137,7 @@ class _GajiPageState extends State<GajiTabs> {
                             children: [
                               const SizedBox(height: 20.0),
                               if (additionalButtonVisibleGaji)
-                                GajiWidget(), // Use GajiWidget here
+                                GajiPage(), // Use GajiWidget here
                               if (additionalButtonVisibleReimburse)
                                 ReimbursePage(), // Use ReimbursePage here
                             ],
@@ -150,7 +150,7 @@ class _GajiPageState extends State<GajiTabs> {
             ),
           ),
         ),
-      ),
-    );
-  }
+     ),
+);
+}
 }
