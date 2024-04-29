@@ -10,13 +10,23 @@ class IzinCutiTabs extends StatefulWidget {
 }
 
 class _IzinCutiTabsState extends State<IzinCutiTabs> {
-  Color leftButtonTextColor = Colors.black;
+  Color leftButtonTextColor = Colors.blue; // Atur warna tab Izin menjadi aktif secara default
   Color rightButtonTextColor = Colors.black;
-  bool additionalButtonVisibleIzin = false;
+  bool additionalButtonVisibleIzin = true;
   bool additionalButtonVisibleCuti = false;
 
-  Color leftButtonBorderColor = Colors.transparent;
+  Color leftButtonBorderColor = Colors.blue;
   Color rightButtonBorderColor = Colors.transparent;
+
+  @override
+  void initState() {
+    super.initState();
+    // Set state sesuai dengan tab yang ingin dibuka secara otomatis
+    setState(() {
+      additionalButtonVisibleIzin = true;
+      additionalButtonVisibleCuti = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,9 +148,9 @@ class _IzinCutiTabsState extends State<IzinCutiTabs> {
                               const SizedBox(height: 20.0),
                               
                               if (additionalButtonVisibleIzin)
-                                IzinPage(), // Gunakan widget AjukanIzinButton
+                                IzinPage(), // Gunakan widget IzinPage
                               if (additionalButtonVisibleCuti)
-                                CutiPage(), // Gunakan widget AjukanCutiButton
+                                CutiPage(), // Gunakan widget CutiPage
                             ],
                           ),
                         ),
