@@ -1,32 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:AlanAbsen/pages/gajireimburse/reimburse/reimburse.dart'; 
-import 'package:AlanAbsen/pages/gajireimburse/gaji/gaji.dart'; // Import AjukanGajiButton
+import 'package:AlanAbsen/pages/gaji/widgetgaji.dart';
+import 'package:AlanAbsen/pages/Reimburse/reimburse.dart';
 
-class GajiPage extends StatefulWidget {
-  const GajiPage({Key? key}) : super(key: key);
+class GajiTabs extends StatefulWidget {
+  const GajiTabs({Key? key}) : super(key: key);
 
   @override
   _GajiPageState createState() => _GajiPageState();
 }
 
-class _GajiPageState extends State<GajiPage> {
-  Color leftButtonTextColor = Colors.blue; // Atur warna tab Gaji menjadi aktif secara default
+class _GajiPageState extends State<GajiTabs> {
+  Color leftButtonTextColor = Colors.blue;
   Color rightButtonTextColor = Colors.black;
   bool additionalButtonVisibleGaji = true;
   bool additionalButtonVisibleReimburse = false;
 
   Color leftButtonBorderColor = Colors.blue;
   Color rightButtonBorderColor = Colors.transparent;
-
-  @override
-  void initState() {
-    super.initState();
-    // Set state sesuai dengan tab yang ingin dibuka secara otomatis
-    setState(() {
-      additionalButtonVisibleGaji = true;
-      additionalButtonVisibleReimburse = false;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,11 +136,10 @@ class _GajiPageState extends State<GajiPage> {
                           child: Column(
                             children: [
                               const SizedBox(height: 20.0),
-                              
                               if (additionalButtonVisibleGaji)
-                                GajiPage(), // Gunakan widget GajiPage
+                                GajiWidget(), // Use GajiWidget here
                               if (additionalButtonVisibleReimburse)
-                                ReimbursePage(), // Gunakan widget ReimbursePage
+                                ReimbursePage(), // Use ReimbursePage here
                             ],
                           ),
                         ),
@@ -161,7 +150,7 @@ class _GajiPageState extends State<GajiPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
+      ),
+    );
+  }
 }
