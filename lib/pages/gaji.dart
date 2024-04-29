@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:AlanAbsen/pages/gajireimburse/reimburse/reimburse.dart'; 
 import 'package:AlanAbsen/pages/gajireimburse/gaji/gaji.dart'; // Import AjukanGajiButton
 
-class GajiReimburse extends StatefulWidget {
-  const GajiReimburse({Key? key}) : super(key: key);
+class GajiPage extends StatefulWidget {
+  const GajiPage({Key? key}) : super(key: key);
 
   @override
-  _GajiReimburseState createState() => _GajiReimburseState();
+  _GajiPageState createState() => _GajiPageState();
 }
 
-class _GajiReimburseState extends State<GajiReimburse> {
+class _GajiPageState extends State<GajiPage> {
   Color leftButtonTextColor = Colors.blue; // Atur warna tab Gaji menjadi aktif secara default
   Color rightButtonTextColor = Colors.black;
   bool additionalButtonVisibleGaji = true;
