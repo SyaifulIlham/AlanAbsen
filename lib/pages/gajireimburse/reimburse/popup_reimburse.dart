@@ -19,7 +19,7 @@ void showDetailPopup(
           borderRadius: BorderRadius.circular(10.0),
         ),
         title: Text(
-          'Detail Gaji',
+          'Detail Reimbursement',
           style: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,

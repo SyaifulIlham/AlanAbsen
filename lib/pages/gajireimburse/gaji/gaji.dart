@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'popup_gaji.dart'; // Import file popup.dart
 
-String namaPegawai = 'John Doe'; // Ubah nama pegawai sesuai kebutuhan
-String unitKerja = 'Bagian Keuangan';
+String namaPegawai = 'Syaiful Ilham'; // Ubah nama pegawai sesuai kebutuhan
+String unitKerja = 'Web Developer';
 String totalGaji = '10.000.000'; // Tambahkan nilai total gaji sesuai kebutuhan
 String statusGaji = 'diproses'; // Ubah unit kerja sesuai kebutuhan
 
@@ -45,23 +45,24 @@ class GajiPage extends StatelessWidget {
 Widget _buildEmployeeTypeSelector() {
   String? selectedType;
   return Container(
-    padding: EdgeInsets.all(10.0),
+    padding: EdgeInsets.all(0.4),
+    height: 40.0,
     decoration: BoxDecoration(
       border: Border.all(color: Colors.grey),
       borderRadius: BorderRadius.circular(5.0),
     ),
     child: DropdownButtonFormField<String>(
       decoration: InputDecoration(
-        hintText: 'Pilih Tipe', // Ubah hint text sesuai kebutuhan
+        hintText: 'Status', // Ubah hint text sesuai kebutuhan
         border: InputBorder.none, // Hilangkan border bawaan DropdownButtonFormField
-        prefixIcon: Icon(Icons.person), // Icon di bagian kiri
-        contentPadding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 16.0), // Atur padding secara manual untuk penyesuaian
+        contentPadding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 16.0), // Atur padding secara manual untuk penyesuaian
+        
       ),
       value: selectedType,
       onChanged: (String? newValue) {
         selectedType = newValue!;
       },
-      items: <String>['Pegawai', 'Magang'].map((String value) {
+      items: <String>['Lunas', 'Belum Lunas', 'Diproses'].map((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -78,7 +79,7 @@ Widget _buildDateSelector(BuildContext context) {
       _selectDate(context); // Panggil fungsi untuk memilih tanggal
     },
     child: Container(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(6.0),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(5.0),
@@ -89,7 +90,7 @@ Widget _buildDateSelector(BuildContext context) {
             'Pilih Tanggal', // Ubah teks sesuai kebutuhan
             style: TextStyle(fontSize: 16.0),
           ),
-          SizedBox(width: 10.0), // Spasi antara teks dan ikon
+          SizedBox(width: 52.0), // Spasi antara teks dan ikon
           Icon(Icons.calendar_today),
         ],
       ),

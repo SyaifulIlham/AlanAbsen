@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:AlanAbsen/pages/gajireimburse/reimburse/popup_reimburse.dart';
+import 'package:flutter/material.dart';
 import 'package:AlanAbsen/pages/gajireimburse/reimburse/ajukan_reimburse.dart';
 
 String namaPegawai = 'John Doe';
@@ -17,15 +16,15 @@ class ReimbursePage extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 16.0),
           Row(
             children: [
               Expanded(
                 child: _buildEmployeeTypeSelector(),
               ),
-              SizedBox(width: 20.0),
+              SizedBox(width: 16.0),
               Expanded(
-                child: _buildDateSelector(context),
+                child: _buildTypeSelector(),
               ),
             ],
           ),
@@ -35,7 +34,7 @@ class ReimbursePage extends StatelessWidget {
             date: '30 April 2024',
             context: context,
           ),
-          SizedBox(height: 20.0), // Tambahkan spasi setelah card
+          SizedBox(height: 320.0),
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -74,26 +73,27 @@ class ReimbursePage extends StatelessWidget {
 Widget _buildEmployeeTypeSelector() {
   String? selectedType;
   return Container(
-    padding: EdgeInsets.all(10.0),
+    padding: EdgeInsets.all(2.0),
     decoration: BoxDecoration(
       border: Border.all(color: Colors.grey),
       borderRadius: BorderRadius.circular(5.0),
     ),
     child: DropdownButtonFormField<String>(
       decoration: InputDecoration(
-        hintText: 'Pilih Tipe',
+        hintText: 'Status',
         border: InputBorder.none,
         prefixIcon: Icon(Icons.person),
         contentPadding: EdgeInsets.symmetric(
-          vertical: 14.0,
-          horizontal: 16.0,
+          vertical: 6.0,
+          horizontal: 14.0,
         ),
       ),
       value: selectedType,
       onChanged: (String? newValue) {
         selectedType = newValue!;
       },
-      items: <String>['Pegawai', 'Magang'].map((String value) {
+      items: <String>['Diproses', 'Diterima', 'Ditolak', 'Lihat Semua']
+          .map((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -103,41 +103,40 @@ Widget _buildEmployeeTypeSelector() {
   );
 }
 
-Widget _buildDateSelector(BuildContext context) {
-  return GestureDetector(
-    onTap: () {
-      _selectDate(context);
-    },
-    child: Container(
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-      child: Row(
-        children: [
-          Text(
-            'Pilih Tanggal',
-            style: TextStyle(fontSize: 16.0),
+Widget _buildTypeSelector() {
+  String? selectedType;
+  return Container(
+    padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.grey),
+      borderRadius: BorderRadius.circular(5.0),
+    ),
+    child: SizedBox(
+      width: 150, // Batas lebar maksimal untuk dropdown
+      child: DropdownButtonFormField<String>(
+        decoration: InputDecoration(
+          hintText: 'Jenis',
+          border: InputBorder.none,
+          prefixIcon: Icon(Icons.category),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 8.0,
+            horizontal: 3.0,
           ),
-          SizedBox(width: 10.0),
-          Icon(Icons.calendar_today),
-        ],
+        ),
+        value: selectedType,
+        onChanged: (String? newValue) {
+          selectedType = newValue!;
+        },
+        items: <String>['Uang transport', 'Biaya Server', 'Lainnya']
+          .map((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
       ),
     ),
   );
-}
-
-Future<void> _selectDate(BuildContext context) async {
-  final DateTime? picked = await showDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(2020),
-    lastDate: DateTime(2101),
-  );
-  if (picked != null) {
-    print('Tanggal yang dipilih: $picked');
-  }
 }
 
 Widget _buildSalaryInfoCard({
@@ -161,7 +160,6 @@ Widget _buildSalaryInfoCard({
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 15.0),
                   Row(
                     children: [
                       Expanded(
@@ -175,7 +173,6 @@ Widget _buildSalaryInfoCard({
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4.0),
                             Text(
                               '$namaPegawai',
                               style: TextStyle(
@@ -198,7 +195,6 @@ Widget _buildSalaryInfoCard({
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4.0),
                             Text(
                               '$jenis',
                               style: TextStyle(
@@ -225,7 +221,6 @@ Widget _buildSalaryInfoCard({
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4.0),
                             Text(
                               '$unitKerja',
                               style: TextStyle(
@@ -248,13 +243,12 @@ Widget _buildSalaryInfoCard({
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4.0),
                             Text(
                               '$nominal',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
-                              ),
+                             ),
                             ),
                           ],
                         ),
@@ -275,7 +269,6 @@ Widget _buildSalaryInfoCard({
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4.0),
                             Container(
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(
@@ -314,13 +307,12 @@ Widget _buildSalaryInfoCard({
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4.0),
                             Text(
                               '$date',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
-                              ),
+                             ),
                             ),
                           ],
                         ),

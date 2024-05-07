@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'slip_gaji.dart'; // Import halaman EditGajiPage
 
 void showDetailPopup(
@@ -6,12 +7,12 @@ void showDetailPopup(
   String date,
   BuildContext context,
 ) {
-  String namaPegawai = 'John Doe';
-  String unitKerja = 'Bagian Keuangan';
+  String namaPegawai = 'Syaiful Ilham';
+  String unitKerja = 'Web Developer';
   double totalGaji = 5000000.0; // Contoh total gaji
   double gajiPokok = 4000000.0; // Contoh gaji pokok
   double tambahan = 1000000.0; // Contoh tambahan
-  double pengurangan = 500000.0; // Contoh pengurangan
+  String pengurangan = '-50000.0'; // Contoh pengurangan
 
   showDialog(
     context: context,
@@ -91,7 +92,7 @@ void showDetailPopup(
                   ),
                 ],
               ),
-              SizedBox(height: 8.0),
+              SizedBox(height: 8.0, width: 2.0,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -105,8 +106,23 @@ void showDetailPopup(
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Gaji Pokok:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0)),
-                      Text('$gajiPokok',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                        Container( // Menambahkan margin ke teks "Gaji Pokok"
+          margin: EdgeInsets.only(right: 1.0),
+          child: Text(
+            'Gaji Pokok:       ',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14.0,
+            ),
+          ),
+        ),
+        Text(
+          gajiPokok.toString(),
+          style: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
                     ],
                   ),
                 ],
@@ -118,15 +134,15 @@ void showDetailPopup(
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Pengurangan :', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0)),
-                      Text('$pengurangan',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.red),),
+                      Text(' Tambahan:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0)),
+                      Text('$tambahan',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.green),),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(' Tambahan:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0)),
-                      Text('$tambahan',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.green),),
+                      Text('Pengurangan :', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0)),
+                      Text('$pengurangan',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.red),),
                     ],
                   ),
                 ],
